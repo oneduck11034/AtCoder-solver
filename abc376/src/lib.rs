@@ -1,21 +1,21 @@
-pub fn q_a(n: u64, c: u64, t_v: Vec<u64>) -> u64 {
-    let mut result_candy= 0_u64;
+pub fn q_a(n: i64, c: i64, t_v: Vec<i64>) -> i64 {
+    let mut result_candy= 1_i64;
     let mut cnt= 0_usize;
-    let mut pre_time= 0_u64;
-    let mut gap_time= 0_u64;
+    let mut gap_time= 0_i64;
+    let mut pre_time= 0_i64;
+    let v_for_calc_pre_time= t_v.clone();
 
+    let mut cnt= 0_usize;
     for e_t in t_v {
-        if cnt!=0 {
-            gap_time= e_t- pre_time;
-            println!("{}", gap_time);
+        if cnt != 0 {
+            gap_time= e_t - pre_time;
             if gap_time >= c {
                 result_candy+=1;
                 gap_time= 0;
-                pre_time= 0;
             }
-        }else{
-            result_candy+=1;
-            pre_time+=1;
+            pre_time= v_for_calc_pre_time[cnt];
+        }else if cnt == 0{
+            pre_time= 1;
         }
 
         cnt+=1;
@@ -38,24 +38,25 @@ mod tests_a {
         assert_eq!(result, 3);
     }
     
-    // #[test]
-    // fn it_works2() {
-    //     let result = q_a(
-    //         3
-    //         ,2
-    //         ,Vec::from([0,2, 4])
-    //     );
-    //     assert_eq!(result, 3);
-    // }
+    #[test]
+    fn it_works2() {
+        let result = q_a(
+            3
+            ,2
+            ,Vec::from([0,2, 4])
+        );
+        assert_eq!(result, 3);
+    }
 
-    // #[test]
-    // fn it_works3() {
-    //     // 10 3
-    //     let result = q_a(
-    //         10
-    //         ,3
-    //         ,Vec::from([0, 3 ,4, 6, 9, 12, 15, 17, 19, 20])
-    //     );
-    //     assert_eq!(result, 7);
-    // }
+    #[test]
+    fn it_works3() {
+        // 10 3
+        let result = q_a(
+            10
+            ,3
+            ,Vec::from([0, 3 ,4, 6, 9, 12, 15, 17, 19, 20])
+        );
+        assert_eq!(result, 7);
+    }
 }
+
