@@ -1,24 +1,20 @@
 pub fn q_a(n: i64, c: i64, t_v: Vec<i64>) -> i64 {
-    let mut result_candy= 1_i64;
+    let mut result_candy= 0_i64;
+    let mut spand_time= 0_i64;
     let mut cnt= 0_usize;
-    let mut gap_time= 0_i64;
-    let mut pre_time= 0_i64;
-    let v_for_calc_pre_time= t_v.clone();
 
-    let mut cnt= 0_usize;
     for e_t in t_v {
         if cnt != 0 {
-            gap_time= e_t - pre_time;
-            if gap_time >= c {
+            
+            if spand_time >= c {
                 result_candy+=1;
-                gap_time= 0;
+                spand_time=0;
             }
-            pre_time= v_for_calc_pre_time[cnt];
         }else if cnt == 0{
-            pre_time= 1;
+            result_candy+=1;
         }
-
-        cnt+=1;
+        
+        cnt+1;
     }
 
     result_candy
